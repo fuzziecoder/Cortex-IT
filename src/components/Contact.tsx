@@ -194,6 +194,7 @@ export default function Contact() {
                             <input
                               type="checkbox"
                               value={service}
+                              suppressHydrationWarning
                               {...register("services")}
                               className="w-5 h-5 rounded-[4px] border border-white/60 bg-transparent cursor-pointer appearance-none checked:bg-white checked:border-white transition-all peer"
                             />
