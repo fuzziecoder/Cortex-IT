@@ -1,26 +1,68 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-bg-main: #000000;
+  --color-bg-alt: #050505;
+  --color-accent-primary: #4F46E5;
+  --color-accent-primary-hover: #6366F1;
+  --color-accent-secondary: #22C55E;
+  --color-text-primary: #F9FAFB;
+  --color-text-muted: #9CA3AF;
+  --color-border-subtle: #111827;
+  --color-chip-bg: #111827;
+  --color-error: #EF4444;
+  --color-footer-bg: #000000;
+  --color-input-bg: transparent;
+  --font-heading: var(--font-michroma), sans-serif;
+  --font-body: "Satoshi", sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-infinite-scroll: infinite-scroll 25s linear infinite;
+  --animate-infinite-scroll-reverse: infinite-scroll-reverse 25s linear infinite;
+
+  @keyframes infinite-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes infinite-scroll-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-primary);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-primary);
 }

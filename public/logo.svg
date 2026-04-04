@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" fill="none">
+  <!-- 
+    Cortex Official Logo
+    Geometrically crafted nested semi-circles representing a technological core.
+  -->
+  
+  <g transform="translate(5, 5) scale(0.55)">
+    <!-- Outer ring (top half) -->
+    <path d="M 10 50 A 40 40 0 0 1 90 50" stroke="#F9FAFB" stroke-width="12" fill="none" />
+    
+    <!-- Middle ring (3/4 circle) -->
+    <path d="M 26 50 A 24 24 0 0 1 74 50 A 24 24 0 0 1 50 74" stroke="#F9FAFB" stroke-width="12" fill="none" />
+    
+    <!-- Inner core (3/4 solid circle) -->
+    <path d="M 36 50 A 14 14 0 0 1 64 50 A 14 14 0 0 1 50 64 L 50 50 Z" fill="#F9FAFB" />
+  </g>
+  
+  <!-- Typography -->
+  <!-- "CORTEX" in Michroma / Tech font -->
+  <text x="70" y="36" font-family="'Michroma', 'Orbitron', 'Space Grotesk', sans-serif" font-weight="700" font-size="29" fill="#F9FAFB" letter-spacing="1.5">
+    CORTEX
+  </text>
+  
+  <!-- Tagline in Satoshi -->
+  <text x="71" y="50" font-family="'Satoshi', 'Inter', sans-serif" font-weight="500" font-size="10" fill="#9CA3AF" letter-spacing="0.2">
+    The Core of Technology
+  </text>
+  
+</svg>

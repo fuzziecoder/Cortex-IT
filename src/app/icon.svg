@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- 
+    Cortex Favicon
+    Geometrically crafted nested semi-circles representing a technological core.
+  -->
+  <path d="M 10 50 A 40 40 0 0 1 90 50" stroke="#F9FAFB" stroke-width="12" fill="none" />
+  <path d="M 26 50 A 24 24 0 0 1 74 50 A 24 24 0 0 1 50 74" stroke="#F9FAFB" stroke-width="12" fill="none" />
+  <path d="M 36 50 A 14 14 0 0 1 64 50 A 14 14 0 0 1 50 64 L 50 50 Z" fill="#F9FAFB" />
+</svg>
