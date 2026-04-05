@@ -30,12 +30,21 @@ export default function Footer() {
   const [subscribed, setSubscribed] = useState(false);
   const year = new Date().getFullYear();
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      setSubscribed(true);
-      setEmail("");
-      setTimeout(() => setSubscribed(false), 4000);
+      try {
+        await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        setSubscribed(true);
+        setEmail("");
+        setTimeout(() => setSubscribed(false), 4000);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

@@ -41,17 +41,24 @@ export default function Contact() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log(data);
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    reset();
-
-    // Reset success state after 5 seconds
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 5000);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Failed to submit");
+      setIsSuccess(true);
+      reset();
+    } catch (e) {
+      console.error(e);
+      alert("Failed to send message, please try again.");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 5000);
+    }
   };
 
   const RequiredBadge = () => (

@@ -1,15 +1,9 @@
-"use client";
-
 import ScrollReveal from "./ScrollReveal";
+import prisma from "@/lib/prisma";
 
-// Logos load from the public directory
-const partners = [
-  { id: 1, name: "SGS", src: "/sgs-logo.webp", href: "https://www.sgslaser.in/" },
-  { id: 2, name: "Bikers Unity Calls", src: "/buc-logo.jpg", href: "https://www.bucindia.com/" },
-  { id: 3, name: "Humanity Calls", src: "/humanitycalls-logo.png", href: "https://www.humanitycalls.org/" },
-];
+export default async function Partners() {
+  const partners = await prisma.partner.findMany();
 
-export default function Partners() {
   return (
     <section className="py-24 bg-black relative border-y border-white/5 overflow-hidden">
       <div className="w-full relative z-10 text-center">
@@ -27,14 +21,14 @@ export default function Partners() {
             {/* Double mapping for seamless infinite scroll loop */}
             {[...partners, ...partners, ...partners].map((partner, i) => (
               <a
-                key={`${partner.id}-${i}`}
-                href={partner.href}
+                key={`${partner.id ?? i}-${i}`}
+                href={partner.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-500 flex items-center justify-center shrink-0 hover:scale-110"
               >
                 <img 
-                  src={partner.src} 
+                  src={partner.logoUrl} 
                   alt={`${partner.name} logo`} 
                   className="h-16 md:h-20 w-auto object-contain rounded-lg shadow-lg"
                 />

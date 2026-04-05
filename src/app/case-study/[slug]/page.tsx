@@ -2,109 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-
-const caseStudies: Record<string, {
-  title: string;
-  subtitle: string;
-  tags: string[];
-  overview: string;
-  challenge: string;
-  solution: string;
-  features: string[];
-  results: string[];
-  logo: string;
-  websiteUrl: string;
-}> = {
-  "sgs-laser": {
-    title: "Sri Guru Sai Laser",
-    subtitle: "Precision Engineered · High Precision Laser Cutting",
-    tags: ["Manufacturing", "Web Development", "SEO"],
-    overview:
-      "Sri Guru Sai Laser is Bengaluru's premier CNC laser cutting and custom fabrication studio. Cortex designed and developed their complete digital presence — a high-performance website showcasing their industrial capabilities, services, and portfolio to clients across Karnataka.",
-    challenge:
-      "SGS Laser had zero digital footprint. Despite being an industry leader in precision CNC cutting, they relied entirely on word-of-mouth. They needed a professional web presence that could attract B2B clients, showcase their fabrication capabilities, and rank on search engines for local manufacturing queries.",
-    solution:
-      "Cortex built a fast, SEO-optimized website with a bold industrial design language. We implemented a service showcase with rich imagery, an interactive portfolio gallery, a contact-driven lead funnel, and deep on-page SEO targeting high-intent manufacturing keywords in Bengaluru and Karnataka.",
-    features: [
-      "Industrial-grade responsive website design",
-      "Service & capability showcase pages",
-      "Portfolio gallery with project details",
-      "Contact form with lead capture integration",
-      "On-page SEO for local manufacturing queries",
-      "Google Business Profile optimization",
-    ],
-    results: [
-      "300% increase in inbound enquiries within 3 months",
-      "Page 1 Google ranking for 'laser cutting Bengaluru'",
-      "40% reduction in client onboarding time via digital portfolio",
-      "Mobile-first performance score of 95+",
-    ],
-    logo: "/sgs-logo.webp",
-    websiteUrl: "https://srigurusailaser.com",
-  },
-  "buc-india": {
-    title: "Bikers Unity Calls (BUC) India",
-    subtitle: "India's Premier Riding Community",
-    tags: ["Community", "Full-Stack", "MERN", "Mobile App"],
-    overview:
-      "BUC India is a heavy-duty full-stack web platform built to manage, connect, and inspire the largest motorcycle riding community in India. Cortex engineered the complete MERN stack application — from premium UI to secure backend infrastructure.",
-    challenge:
-      "BUC India had a rapidly growing community of 50,000+ riders scattered across WhatsApp groups and social media. They needed a centralized platform for ride coordination, member management, event scheduling, and community engagement — without losing the raw, rider-first culture.",
-    solution:
-      "Cortex architected and delivered a full MERN stack platform with real-time ride tracking, event management, chapter-based member directories, and a custom admin dashboard. The entire system was designed to scale with the community while keeping the biker identity front and center.",
-    features: [
-      "Member registration & profile management",
-      "Chapter-based community directories",
-      "Ride event creation, RSVP & live tracking",
-      "Admin dashboard for national & chapter leads",
-      "Real-time notifications & announcements",
-      "Media gallery for ride documentation",
-    ],
-    results: [
-      "50,000+ registered community members onboarded",
-      "200+ rides coordinated through the platform",
-      "85% reduction in manual coordination overhead",
-      "Real-time ride tracking across 15+ Indian states",
-    ],
-    logo: "/buc-logo.jpg",
-    websiteUrl: "https://bucindia.com",
-  },
-  "humanity-calls": {
-    title: "Humanity Calls",
-    subtitle: "Compassion-Driven Community Impact",
-    tags: ["Community", "Social Impact", "Web App"],
-    overview:
-      "Humanity Calls is a compassion-driven community platform connecting volunteers, donors, and NGOs for global humanitarian impact. Cortex built a modern, accessible web application that simplifies the process of contributing to meaningful social causes.",
-    challenge:
-      "Humanitarian organizations often struggle with fragmented volunteer databases, opaque donation tracking, and disconnected communication channels. Humanity Calls needed a unified digital platform that could bridge the gap between willing contributors and organizations doing critical work on the ground.",
-    solution:
-      "Cortex designed and developed a clean, trust-focused web application with intuitive volunteer sign-up flows, transparent donation tracking, NGO partnership directories, and impact dashboards. The platform prioritizes accessibility and simplicity to lower the barrier to social participation.",
-    features: [
-      "Volunteer registration & opportunity matching",
-      "Transparent donation tracking dashboard",
-      "NGO partnership directory & profiles",
-      "Impact metrics & reporting",
-      "Event coordination for humanitarian drives",
-      "Multi-language accessibility support",
-    ],
-    results: [
-      "Connected 100+ NGOs on a single platform",
-      "Streamlined volunteer onboarding by 60%",
-      "Full transparency on donation allocation",
-      "Mobile-responsive design for field accessibility",
-    ],
-    logo: "/humanitycalls-logo.png",
-    websiteUrl: "https://humanitycalls.org",
-  },
-};
+import prisma from "@/lib/prisma";
 
 export async function generateStaticParams() {
-  return Object.keys(caseStudies).map((slug) => ({ slug }));
+  const projects = await prisma.project.findMany({ select: { slug: true } });
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const study = caseStudies[slug];
+  const study = await prisma.project.findUnique({ where: { slug } });
+  
   if (!study) return { title: "Case Study — Cortex" };
   return {
     title: `${study.title} — Cortex Case Study`,
@@ -114,8 +22,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const study = caseStudies[slug];
-  if (!study) notFound();
+  const rawStudy = await prisma.project.findUnique({ where: { slug } });
+  
+  if (!rawStudy) notFound();
+
+  const study = {
+    ...rawStudy,
+    tags: JSON.parse(rawStudy.tags) as string[],
+    features: JSON.parse(rawStudy.features) as string[],
+    results: JSON.parse(rawStudy.results) as string[],
+  };
 
   return (
     <main className="min-h-screen bg-black text-white">
