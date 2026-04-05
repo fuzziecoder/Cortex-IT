@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="public/logo.svg" alt="Cortex Logo" width="120" height="120" />
-  <h1 align="center">Cortex Studio</h1>
+  <img width="606" height="302" alt="Screenshot_2026-04-04_214502-removebg-preview" src="https://github.com/user-attachments/assets/5f889d59-a07a-4700-867e-f41cb38498bb" />
   <p align="center">
     <strong>A high-performance, dark-minimalist digital agency portfolio.</strong>
     <br />
