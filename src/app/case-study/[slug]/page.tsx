@@ -13,6 +13,7 @@ const caseStudies: Record<string, {
   features: string[];
   results: string[];
   logo: string;
+  websiteUrl: string;
 }> = {
   "sgs-laser": {
     title: "Sri Guru Sai Laser",
@@ -39,6 +40,7 @@ const caseStudies: Record<string, {
       "Mobile-first performance score of 95+",
     ],
     logo: "/sgs-logo.webp",
+    websiteUrl: "https://srigurusailaser.com",
   },
   "buc-india": {
     title: "Bikers Unity Calls (BUC) India",
@@ -65,6 +67,7 @@ const caseStudies: Record<string, {
       "Real-time ride tracking across 15+ Indian states",
     ],
     logo: "/buc-logo.jpg",
+    websiteUrl: "https://bucindia.com",
   },
   "humanity-calls": {
     title: "Humanity Calls",
@@ -91,6 +94,7 @@ const caseStudies: Record<string, {
       "Mobile-responsive design for field accessibility",
     ],
     logo: "/humanitycalls-logo.png",
+    websiteUrl: "https://humanitycalls.org",
   },
 };
 
@@ -163,9 +167,23 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               {study.title}
             </h1>
           </div>
-          <p className="text-gray-400 text-xl md:text-2xl font-light tracking-wide">
+          <p className="text-gray-400 text-xl md:text-2xl font-light tracking-wide mb-10">
             {study.subtitle}
           </p>
+
+          {study.websiteUrl && (
+            <a
+              href={study.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white text-black font-sans font-medium text-sm tracking-wide hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 hover:-translate-y-1"
+            >
+              Visit Work
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          )}
 
           {/* Divider */}
           <div className="mt-16 h-[1px] bg-white/10" />
