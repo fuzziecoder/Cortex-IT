@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
@@ -11,6 +12,7 @@ const caseStudies: Record<string, {
   solution: string;
   features: string[];
   results: string[];
+  logo: string;
 }> = {
   "sgs-laser": {
     title: "Sri Guru Sai Laser",
@@ -36,6 +38,7 @@ const caseStudies: Record<string, {
       "40% reduction in client onboarding time via digital portfolio",
       "Mobile-first performance score of 95+",
     ],
+    logo: "/sgs-logo.webp",
   },
   "buc-india": {
     title: "Bikers Unity Calls (BUC) India",
@@ -61,6 +64,7 @@ const caseStudies: Record<string, {
       "85% reduction in manual coordination overhead",
       "Real-time ride tracking across 15+ Indian states",
     ],
+    logo: "/buc-logo.jpg",
   },
   "humanity-calls": {
     title: "Humanity Calls",
@@ -86,6 +90,7 @@ const caseStudies: Record<string, {
       "Full transparency on donation allocation",
       "Mobile-responsive design for field accessibility",
     ],
+    logo: "/humanitycalls-logo.png",
   },
 };
 
@@ -120,8 +125,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <ArrowLeft size={18} />
             Back to Projects
           </Link>
-          <Link href="/" className="font-heading font-bold text-lg tracking-wide uppercase">
-            Cortex
+          <Link href="/" className="flex items-center justify-center">
+            <Image 
+              src="/logo-full.png" 
+              alt="Cortex Studio" 
+              width={100}
+              height={32}
+              style={{ width: "auto" }}
+              className="h-8 md:h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+            />
           </Link>
         </div>
       </div>
@@ -141,9 +153,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             ))}
           </div>
 
-          <h1 className="font-heading font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] mb-6">
-            {study.title}
-          </h1>
+          <div className="flex flex-col md:flex-row md:items-center gap-8 mb-6">
+            {study.logo && (
+              <div className="relative h-20 sm:h-24 inline-flex overflow-hidden rounded bg-white/5 p-4 mix-blend-screen shrink-0">
+                <Image src={study.logo} alt={`${study.title} Logo`} width={240} height={96} style={{ width: 'auto' }} className="object-contain h-full w-auto" />
+              </div>
+            )}
+            <h1 className="font-heading font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05]">
+              {study.title}
+            </h1>
+          </div>
           <p className="text-gray-400 text-xl md:text-2xl font-light tracking-wide">
             {study.subtitle}
           </p>

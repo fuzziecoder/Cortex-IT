@@ -37,6 +37,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${michroma.variable} antialiased`}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-screen">{children}</body>
     </html>

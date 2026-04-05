@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
 
 const projects = [
@@ -10,6 +11,7 @@ const projects = [
     name: "Sri Guru Sai Laser",
     desc: "Precision-engineered digital presence for Bengaluru's premier CNC laser cutting and custom fabrication studio.",
     tags: ["Manufacturing", "Web Development", "SEO"],
+    logo: "/sgs-logo.webp",
   },
   {
     id: 2,
@@ -17,6 +19,7 @@ const projects = [
     name: "BUC India",
     desc: "A heavy-duty full-stack platform built to manage, connect, and inspire India's largest motorcycle riding community.",
     tags: ["Community", "Full-Stack", "MERN"],
+    logo: "/buc-logo.jpg",
   },
   {
     id: 3,
@@ -24,6 +27,7 @@ const projects = [
     name: "Humanity Calls",
     desc: "A compassion-driven community platform connecting volunteers, donors, and NGOs for global humanitarian impact.",
     tags: ["Community", "Social Impact", "Web App"],
+    logo: "/humanitycalls-logo.png"
   },
 ];
 
@@ -59,6 +63,11 @@ export default function Projects() {
                   <div className="bg-[#0a0a0a] rounded-2xl h-full w-full p-8 md:p-10 flex flex-col justify-between group-hover:bg-black transition-colors duration-700">
                     
                     <div>
+                      {project.logo && (
+                        <div className="mb-6 relative h-12 sm:h-16 inline-flex overflow-hidden rounded">
+                          <Image src={project.logo} alt={`${project.name} Logo`} width={160} height={64} style={{ width: 'auto' }} className="object-contain object-left h-full w-auto opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+                        </div>
+                      )}
                       <h3 className="font-heading font-light text-2xl md:text-3xl text-white mb-4">
                         {project.name}
                       </h3>

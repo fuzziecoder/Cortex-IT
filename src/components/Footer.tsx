@@ -50,7 +50,7 @@ export default function Footer() {
             <h3 className="font-heading font-bold text-xl md:text-2xl text-white leading-tight mb-6">
               Sign up for our<br />newsletter today.
             </h3>
-            <form onSubmit={handleSubscribe} className="flex gap-0 mb-3">
+            <form onSubmit={handleSubscribe} className="flex gap-0 mb-3" suppressHydrationWarning>
               <input
                 type="email"
                 value={email}
@@ -61,6 +61,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
+                suppressHydrationWarning
                 className="bg-[#C8F542] text-black font-semibold text-sm px-6 py-3 rounded-r-lg hover:bg-[#d4ff52] transition-colors shrink-0"
               >
                 {subscribed ? "✓" : "Subscribe"}
