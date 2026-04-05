@@ -1,68 +1,114 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ScrollReveal from "./ScrollReveal";
 
 export default function Hero() {
-  const words = ["The", "only", "build", "that", "matters"];
-
   return (
-    <section className="relative min-h-screen flex items-center bg-[var(--color-bg-main)] overflow-hidden pt-20">
-      <div className="container mx-auto px-6 md:px-12 flex flex-col justify-center">
-        
-        {/* Stacked Heading */}
-        <div className="flex flex-col mb-10">
-          {words.map((word, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.7,
-                delay: index * 0.1,
-                ease: [0.22, 0.61, 0.36, 1]
-              }}
-              className="overflow-hidden"
-            >
-              <h1 className="font-heading font-bold text-6xl md:text-8xl lg:text-[9rem] leading-[0.85] tracking-tighter uppercase text-[var(--color-text-primary)]">
-                {word}
-              </h1>
-            </motion.div>
-          ))}
-        </div>
+    <section className="relative min-h-screen flex flex-col bg-black overflow-hidden pt-32 pb-12">
+      
+      {/* Abstract radiating lines effect on the left background */}
+      <div className="absolute top-0 left-0 w-2/3 h-full pointer-events-none opacity-20">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-white">
+          <path 
+            d="M 5 0 L 5 100 
+               M 15 0 L 25 100 
+               M 25 0 L 45 100 
+               M 35 0 L 70 100 
+               M 45 0 L 100 100" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="0.2" 
+          />
+        </svg>
+      </div>
 
-        {/* Decorative Divider */}
-        <ScrollReveal delay={0.6} duration={0.8} distance={20}>
-          <div className="text-[var(--color-text-muted)] font-mono text-sm tracking-[0.3em] mb-10 opacity-60">
-            / * * - _ * / _ / - - - * *
-          </div>
-        </ScrollReveal>
-
-        {/* Subheading & CTAs */}
-        <div className="max-w-xl">
-          <ScrollReveal delay={0.7} duration={0.8} distance={20}>
-            <p className="text-xl md:text-2xl text-[var(--color-text-muted)] mb-10 leading-relaxed">
-              Full-stack studio for apps, websites, and AI experiences.
-            </p>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.8} duration={0.8} distance={20}>
-            <div className="flex flex-col sm:flex-row gap-6 mt-12 items-center justify-center lg:justify-start">
-              <a
-                href="#contact"
-                className="px-10 py-4 rounded-full bg-white text-black font-sans font-medium text-sm tracking-widest uppercase hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-300 flex items-center justify-center min-w-[220px]"
-              >
-                BEGIN YOUR BLUEPRINT
-              </a>
-              <a
-                href="#projects"
-                className="px-10 py-4 rounded-full border border-white/50 bg-transparent text-white font-sans font-medium text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center min-w-[220px]"
-              >
-                VIEW PROJECTS
-              </a>
+      <div className="container mx-auto px-6 md:px-12 flex-1 flex flex-col relative z-10 w-full">
+        <div className="flex flex-col lg:flex-row flex-1 w-full justify-between items-end pb-24 md:pb-20">
+          
+          {/* Left Bottom Floating Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="hidden md:flex flex-col bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 w-[380px] shadow-2xl relative mt-auto"
+          >
+            <div className="flex items-start gap-4 mb-10">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500 mt-2 shrink-0 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.6)]" />
+              <p className="text-gray-200 text-xl font-light leading-snug">
+                Cortex announce a strategic digital partnership
+              </p>
             </div>
-          </ScrollReveal>
+            <div className="flex justify-end">
+              <button 
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-[#C8F542] text-black font-medium text-sm px-6 py-2.5 rounded-full hover:shadow-[0_0_20px_rgba(200,245,66,0.3)] transition-all flex items-center gap-2 tracking-wide block w-fit"
+              >
+                Read more <span className="text-lg leading-none font-light">→</span>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Right Side Text Block */}
+          <div className="w-full lg:w-[60%] flex flex-col items-start lg:items-end lg:text-left ml-auto mt-20 lg:mt-0 lg:pb-12">
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="font-heading font-medium text-4xl sm:text-5xl md:text-6xl lg:text-[70px] leading-[1.05] tracking-tight text-white mb-20 md:mb-24 text-left w-full"
+            >
+              End‑to‑end<br />
+              digital engineering<br />
+              for ambitious teams
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="text-gray-400 text-lg md:text-xl font-light leading-relaxed max-w-sm text-left lg:mr-12 xl:mr-24 mr-auto w-full"
+            >
+              From product strategy and UX to mobile, web, and automation, Cortex builds and scales the systems your business runs on.
+            </motion.p>
+            
+            {/* Mobile-only duplicate card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex md:hidden flex-col bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 w-full shadow-2xl relative mt-16"
+            >
+              <div className="flex items-start gap-4 mb-8">
+                <div className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.6)]" />
+                <p className="text-gray-200 text-lg font-light leading-snug">
+                  Cortex announce a strategic digital partnership
+                </p>
+              </div>
+              <div className="flex justify-end">
+                <button 
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-[#C8F542] text-black font-medium text-sm px-5 py-2 rounded-full hover:shadow-[0_0_15px_rgba(200,245,66,0.4)] transition-all flex items-center gap-2 tracking-wide w-fit"
+                >
+                  Read more <span className="text-lg leading-none font-light">→</span>
+                </button>
+              </div>
+            </motion.div>
+          </div>
+
         </div>
+        
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center cursor-pointer hover:opacity-70 transition-opacity"
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+        >
+          <span className="text-gray-500 font-sans text-[10px] tracking-widest uppercase mb-2">Explore</span>
+          <motion.div animate={{ y: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }} className="text-gray-500 text-xs">
+            ↓
+          </motion.div>
+        </motion.div>
+
       </div>
     </section>
   );

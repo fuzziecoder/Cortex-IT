@@ -15,11 +15,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMobileMenuOpen(false);
+  };
+
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "Why Us", href: "#why-us" },
+    { name: "About", id: "about" },
+    { name: "Services", id: "services" },
+    { name: "Projects", id: "projects" },
+    { name: "Why Us", id: "why-us" },
   ];
 
   return (
@@ -30,31 +35,31 @@ export default function Navbar() {
         }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <a href="#" className="flex items-center relative z-10 transition-transform hover:scale-105 duration-300">
+        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center relative z-10 transition-transform hover:scale-105 duration-300">
           <img
             src="/logo-full.png"
             alt="Cortex Studio"
             className="h-10 md:h-12 w-auto object-contain"
           />
-        </a>
+        </button>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.name}
-              href={link.href}
+              onClick={() => scrollTo(link.id)}
               className="text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors text-sm font-medium tracking-wide"
             >
               {link.name}
-            </a>
+            </button>
           ))}
-          <a
-            href="#contact"
+          <button
+            onClick={() => scrollTo("contact")}
             className="ml-4 px-8 py-2.5 rounded-full bg-white text-black font-sans font-medium text-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
           >
             START PROJECT
-          </a>
+          </button>
         </nav>
 
         {/* Mobile Toggle */}
@@ -70,24 +75,23 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="absolute top-0 left-0 w-full h-screen bg-[var(--color-bg-main)] flex flex-col items-center justify-center gap-8 md:hidden">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.name}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => scrollTo(link.id)}
               className="text-2xl font-heading text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] transition-colors"
             >
               {link.name}
-            </a>
+            </button>
           ))}
-          <a
-            href="#contact"
-            onClick={() => setMobileMenuOpen(false)}
+          <button
+            onClick={() => scrollTo("contact")}
             className="mt-4 px-8 py-4 rounded-none bg-[var(--color-accent-primary)] text-white text-lg font-heading font-medium"
           >
             START PROJECT
-          </a>
+          </button>
         </div>
       )}
     </header>
   );
 }
+
