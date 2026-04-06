@@ -1,4 +1,8 @@
 import prisma from "@/lib/prisma";
+import InboxActionButtons from "./InboxActionButtons";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function InboxPage() {
   const contacts = await prisma.contactRequest.findMany({
@@ -32,6 +36,7 @@ export default async function InboxPage() {
                 <p className="text-sm text-gray-300 mt-2"><strong>Timeline:</strong> {c.timeline}</p>
                 <p className="text-sm text-gray-200 mt-4 leading-relaxed">"{c.description}"</p>
               </div>
+              <InboxActionButtons id={c.id} />
             </div>
           ))
         )}

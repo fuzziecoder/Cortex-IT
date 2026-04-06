@@ -1,5 +1,9 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
+import PartnerActionButtons from "./PartnerActionButtons";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function AdminPartners() {
   const partners = await prisma.partner.findMany({
@@ -26,10 +30,7 @@ export default async function AdminPartners() {
               {p.websiteUrl}
             </a>
             
-            <div className="flex gap-2 w-full pt-4 border-t border-white/10">
-              <button className="flex-1 text-xs py-2 bg-white/10 hover:bg-white/20 rounded text-center transition-colors">Edit</button>
-              <button className="flex-1 text-xs py-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded text-center transition-colors">Delete</button>
-            </div>
+            <PartnerActionButtons id={p.id} />
           </div>
         ))}
       </div>

@@ -7,13 +7,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const cookieStore = await cookies();
   const token = cookieStore.get("admin_token");
 
-  // Protect all /admin routes except /admin/login
+  // If not authenticated, render only children (for login page)
   if (!token) {
-    // If we're not already on the login page, redirect
-    // We handle this inside page.tsx or middleware ideally, 
-    // but doing it here prevents layout render if unauthorized.
-    // Wait, if we are on /admin/login, layout still renders. 
-    // I'll check headers to allow /admin/login freely.
+    return <>{children}</>;
   }
 
   return (

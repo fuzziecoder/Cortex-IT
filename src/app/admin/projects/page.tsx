@@ -1,5 +1,9 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
+import ProjectActionButtons from "./ProjectActionButtons";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function AdminProjects() {
   const projects = await prisma.project.findMany({
@@ -32,10 +36,7 @@ export default async function AdminProjects() {
                 ))}
               </div>
             </div>
-            <div className="flex gap-2 mt-4 pt-4 border-t border-white/10">
-              <button className="flex-1 text-sm py-2 bg-white/10 hover:bg-white/20 rounded text-center transition-colors">Edit</button>
-              <button className="flex-1 text-sm py-2 bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded text-center transition-colors">Delete</button>
-            </div>
+            <ProjectActionButtons id={p.id} />
           </div>
         ))}
       </div>
