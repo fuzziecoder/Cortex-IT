@@ -11,6 +11,8 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ChatBot from "@/components/ChatBot";
 
+export const revalidate = 60; // Auto-refresh homepage cache every 60 seconds
+
 export default function Home() {
   return (
     <>
