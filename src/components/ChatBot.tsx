@@ -143,13 +143,10 @@ export default function ChatBot() {
           isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'
         }`}
       >
-        <div className="hidden md:flex bg-white text-black px-6 py-3.5 rounded-full shadow-2xl font-sans font-medium text-[17px] whitespace-nowrap items-center">
-          Chat with us <span className="ml-2 text-xl">👋</span>
-        </div>
         <button
           onClick={() => setIsOpen(true)}
           suppressHydrationWarning
-          className="w-16 h-16 rounded-full bg-black border-[1.5px] border-white/20 text-white flex items-center justify-center transition-all duration-300 hover:bg-white/10 shadow-2xl shrink-0"
+          className="w-16 h-16 rounded-full bg-[#C8F542] border-[1.5px] border-[#C8F542] text-black flex items-center justify-center transition-all duration-300 hover:bg-[#b0d836] shadow-2xl shrink-0"
           aria-label="Open Chat"
         >
           <MessageSquare size={26} strokeWidth={2} />

@@ -71,7 +71,7 @@ export default function Footer() {
               <button
                 type="submit"
                 suppressHydrationWarning
-                className="bg-white text-black font-medium text-sm px-6 py-3 rounded-r-lg hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 shrink-0"
+                className="bg-[#C8F542] text-black font-medium text-sm px-6 py-3 rounded-r-lg hover:shadow-[0_0_15px_rgba(200,245,66,0.3)] transition-all duration-300 shrink-0"
               >
                 {subscribed ? "✓" : "Subscribe"}
               </button>
@@ -174,7 +174,7 @@ export default function Footer() {
               className="h-10 md:h-14 w-auto object-contain opacity-80"
             />
             <p className="text-gray-500 text-xs font-light text-center">
-              © Copyright {year} | Design & Developed By Cortex Studio.
+              © Copyright {year} | Design & Developed By team Cortex
             </p>
           </div>
           <span className="text-gray-500 hover:text-gray-300 text-xs font-light transition-colors cursor-pointer">

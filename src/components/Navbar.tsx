@@ -49,14 +49,14 @@ export default function Navbar() {
             <button
               key={link.name}
               onClick={() => scrollTo(link.id)}
-              className="text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors text-sm font-medium tracking-wide"
+              className="text-[var(--color-text-muted)] hover:text-[#C8F542] transition-colors text-sm font-medium tracking-wide"
             >
               {link.name}
             </button>
           ))}
           <button
             onClick={() => scrollTo("contact")}
-            className="ml-4 px-8 py-2.5 rounded-full bg-white text-black font-sans font-medium text-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
+            className="ml-4 px-8 py-2.5 rounded-full bg-[#C8F542] text-black font-sans font-medium text-sm hover:shadow-[0_0_15px_rgba(200,245,66,0.4)] transition-all"
           >
             START PROJECT
           </button>
@@ -78,14 +78,14 @@ export default function Navbar() {
             <button
               key={link.name}
               onClick={() => scrollTo(link.id)}
-              className="text-2xl font-heading text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] transition-colors"
+              className="text-2xl font-heading text-[var(--color-text-primary)] hover:text-[#C8F542] transition-colors"
             >
               {link.name}
             </button>
           ))}
           <button
             onClick={() => scrollTo("contact")}
-            className="mt-4 px-8 py-4 rounded-none bg-[var(--color-accent-primary)] text-white text-lg font-heading font-medium"
+            className="mt-4 px-8 py-4 rounded-none bg-[#C8F542] text-black text-lg font-heading font-medium"
           >
             START PROJECT
           </button>

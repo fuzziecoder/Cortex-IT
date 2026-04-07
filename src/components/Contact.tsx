@@ -293,7 +293,7 @@ export default function Contact() {
                       type="submit"
                       disabled={isSubmitting}
                       suppressHydrationWarning
-                      className="px-12 py-4 rounded-full bg-white text-black font-sans font-medium text-lg tracking-wide hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-2 border border-transparent"
+                      className="px-12 py-4 rounded-full bg-[#C8F542] text-black font-sans font-medium text-lg tracking-wide hover:shadow-[0_0_15px_rgba(200,245,66,0.4)] transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-2 border border-transparent"
                     >
                       {isSubmitting ? (
                         <>
