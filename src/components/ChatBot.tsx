@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageSquare, ChevronLeft, MoreVertical, Send, Loader2 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 interface Message {
   role: "user" | "assistant";
@@ -164,14 +165,28 @@ export default function ChatBot() {
             className="fixed bottom-6 right-6 z-50 w-[350px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-3rem)] bg-white rounded-[1.5rem] shadow-2xl overflow-hidden flex flex-col font-sans"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 bg-white shrink-0">
-              <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-black transition-colors">
-                <ChevronLeft size={24} />
-              </button>
-              <h3 className="font-medium text-black text-base mx-auto">Let&apos;s get you what you need.</h3>
-              <button className="text-gray-500 hover:text-black transition-colors">
-                <MoreVertical size={20} />
-              </button>
+            <div className="flex items-center justify-between p-4 bg-white border-b border-gray-100 shrink-0">
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/chatbot-logo.png"
+                  alt="Cortex Logo"
+                  width={120}
+                  height={30}
+                  className="object-contain pt-1"
+                  priority
+                />
+                <span className="text-[13px] font-medium text-gray-500 bg-[#F4F4F5] px-2 py-0.5 rounded-md border border-gray-200">
+                  Assistance
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <button className="text-gray-400 hover:text-black transition-colors">
+                  <MoreVertical size={20} />
+                </button>
+                <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-black transition-colors">
+                  <ChevronLeft size={24} className="rotate-180" />
+                </button>
+              </div>
             </div>
 
             {/* Chat Body */}
