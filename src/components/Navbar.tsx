@@ -35,7 +35,7 @@ export default function Navbar() {
         }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center relative z-10 transition-transform hover:scale-105 duration-300">
+        <button suppressHydrationWarning onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center relative z-10 transition-transform hover:scale-105 duration-300">
           <img
             src="/logo-full.png"
             alt="Cortex Studio"
@@ -47,6 +47,7 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <button
+              suppressHydrationWarning
               key={link.name}
               onClick={() => scrollTo(link.id)}
               className="text-[var(--color-text-muted)] hover:text-[#C8F542] transition-colors text-sm font-medium tracking-wide"
@@ -55,6 +56,7 @@ export default function Navbar() {
             </button>
           ))}
           <button
+            suppressHydrationWarning
             onClick={() => scrollTo("contact")}
             className="ml-4 px-8 py-2.5 rounded-full bg-[#C8F542] text-black font-sans font-medium text-sm hover:shadow-[0_0_15px_rgba(200,245,66,0.4)] transition-all"
           >
@@ -64,6 +66,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
+          suppressHydrationWarning
           className="md:hidden relative z-10 text-[var(--color-text-primary)]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -76,6 +79,7 @@ export default function Navbar() {
         <div className="absolute top-0 left-0 w-full h-screen bg-[var(--color-bg-main)] flex flex-col items-center justify-center gap-8 md:hidden">
           {navLinks.map((link) => (
             <button
+              suppressHydrationWarning
               key={link.name}
               onClick={() => scrollTo(link.id)}
               className="text-2xl font-heading text-[var(--color-text-primary)] hover:text-[#C8F542] transition-colors"
@@ -84,6 +88,7 @@ export default function Navbar() {
             </button>
           ))}
           <button
+            suppressHydrationWarning
             onClick={() => scrollTo("contact")}
             className="mt-4 px-8 py-4 rounded-none bg-[#C8F542] text-black text-lg font-heading font-medium"
           >
@@ -94,4 +99,3 @@ export default function Navbar() {
     </header>
   );
 }
-

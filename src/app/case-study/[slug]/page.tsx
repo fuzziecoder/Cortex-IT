@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const study = await prisma.project.findUnique({ where: { slug } });
-  
+
   if (!study) return { title: "Case Study — Cortex" };
   return {
     title: `${study.title} — Cortex Case Study`,
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const rawStudy = await prisma.project.findUnique({ where: { slug } });
-  
+
   if (!rawStudy) notFound();
 
   const study = {
@@ -46,9 +46,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             Back to Projects
           </Link>
           <Link href="/" className="flex items-center justify-center">
-            <Image 
-              src="/logo-full.png" 
-              alt="Cortex Studio" 
+            <Image
+              src="/logo-full.png"
+              alt="Cortex Studio"
               width={100}
               height={32}
               style={{ width: "auto" }}

@@ -13,8 +13,6 @@ const formSchema = z.object({
   lastName: z.string().min(2, "Required"),
   email: z.string().email("Valid email required"),
   phone: z.string().min(10, "Required"),
-  city: z.string().min(2, "Required"),
-  state: z.string().min(2, "Required"),
   services: z.array(z.string()).min(1, "Select at least one service"),
   description: z.string().min(10, "Please provide a brief description"),
   budget: z.string().min(1, "Required"),
@@ -162,32 +160,6 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {/* Location */}
-                  <div>
-                    <label className="block text-white font-sans font-light text-xl mb-6">
-                      Location <RequiredBadge />
-                    </label>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4">
-                      <div className="flex flex-col">
-                        <input
-                          {...register("city")}
-                          suppressHydrationWarning
-                          className="w-full bg-transparent border-b border-white text-white py-2 focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors placeholder-transparent"
-                        />
-                        <span className="text-white text-sm font-light mt-2 tracking-wide">City</span>
-                        {errors.city && <span className="text-[var(--color-error)] text-xs mt-1">{errors.city.message}</span>}
-                      </div>
-                      <div className="flex flex-col">
-                        <input
-                          {...register("state")}
-                          suppressHydrationWarning
-                          className="w-full bg-transparent border-b border-white text-white py-2 focus:outline-none focus:border-[var(--color-accent-primary)] transition-colors placeholder-transparent"
-                        />
-                        <span className="text-white text-sm font-light mt-2 tracking-wide">State / Province / Region</span>
-                        {errors.state && <span className="text-[var(--color-error)] text-xs mt-1">{errors.state.message}</span>}
-                      </div>
-                    </div>
-                  </div>
 
                   {/* Services Checkboxes */}
                   <div>

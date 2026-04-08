@@ -40,6 +40,7 @@ export default function Hero() {
             </div>
             <div className="flex justify-end">
               <button 
+                suppressHydrationWarning
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 className="bg-[#C8F542] text-black font-medium text-sm px-6 py-2.5 rounded-full hover:shadow-[0_0_20px_rgba(200,245,66,0.3)] transition-all flex items-center gap-2 tracking-wide block w-fit"
               >
@@ -85,6 +86,7 @@ export default function Hero() {
               </div>
               <div className="flex justify-end">
                 <button 
+                  suppressHydrationWarning
                   onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                   className="bg-[#C8F542] text-black font-medium text-sm px-5 py-2 rounded-full hover:shadow-[0_0_15px_rgba(200,245,66,0.4)] transition-all flex items-center gap-2 tracking-wide w-fit"
                 >
