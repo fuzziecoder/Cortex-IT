@@ -41,6 +41,19 @@
 *   **AI Chatbot Assistant**: Embedded frontend floating chatbot powered by a backend endpoint integrating with the **NVIDIA meta/llama-3.1-8b-instruct** LLM via API stream. It's fully context-aware of the agency's portfolio.
 *   **Contact & Lead Ingestion**: React Hook Form and Zod ensure type-safe leads sent securely. Backed by `Nodemailer` for immediate notification delivery.
 
+## 🧭 Website Sections
+The frontend is composed of meticulously crafted functional sections:
+*   **Hero**: A highly visual, WebGL-inspired full-viewport animated introduction.
+*   **About**: Brand story and mission statement with subtle typography animations.
+*   **Services**: Interactive cards detailing core offerings (e.g., App Dev, Cloud, SEO, Chatbot Building).
+*   **Projects**: A grid-based portfolio fueled directly by the database CMS, linking out to dynamic `/case-study/[slug]` pages.
+*   **Testimonials**: Advanced scroll-driven stack array of client reviews.
+*   **Why Us**: Value proposition cards tied to a scroll-progress tracking line.
+*   **How We Work**: A numbered, step-by-step breakdown of the overarching development lifecycle.
+*   **Partners (Who We Work With)**: An infinite-scrolling marquee logo carousel sourced from the CMS.
+*   **Contact**: A fully functional, validated lead ingestion form integrated with Nodemailer.
+*   **Global Components**: Sticky `Navbar`, comprehensive `Footer`, and floating NVIDIA `ChatBot`.
+
 ## 🛠️ Architecture & Tech Stack
 
 | Technology | Purpose |
