@@ -52,3 +52,35 @@ model Partner {
   websiteUrl String
   createdAt DateTime @default(now())
 }
+
+model Job {
+  id              String   @id @default(cuid())
+  title           String
+  description     String
+  department      String
+  locationType    String   // e.g. "Remote", "Bangalore"
+  employmentType  String   // e.g. "Full-time", "Contract"
+  salaryRange     String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  applications    JobApplication[]
+}
+
+model JobApplication {
+  id              String   @id @default(cuid())
+  jobId           String
+  job             Job      @relation(fields: [jobId], references: [id])
+  
+  firstName       String
+  lastName        String
+  email           String
+  phone           String
+  linkedinUrl     String?
+  portfolioUrl    String?
+  message         String
+  
+  status          String   @default("Pending") // Pending, Reviewed, Rejected, Hired
+  createdAt       DateTime @default(now())
+}
