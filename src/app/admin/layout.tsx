@@ -28,6 +28,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/admin/subscribers" className="block px-4 py-2 rounded hover:bg-white/5 text-sm">Subscribers & Broadcaster</Link>
           <Link href="/admin/projects" className="block px-4 py-2 rounded hover:bg-white/5 text-sm">Projects</Link>
           <Link href="/admin/partners" className="block px-4 py-2 rounded hover:bg-white/5 text-sm">Partners</Link>
+          <Link href="/admin/jobs" className="block px-4 py-2 rounded hover:bg-white/5 text-sm">Jobs Board</Link>
+          <Link href="/admin/applications" className="block px-4 py-2 rounded hover:bg-white/5 text-sm">Job Applications</Link>
         </nav>
         <div className="p-4 border-t border-white/10">
           <form action="/api/admin/logout" method="POST">

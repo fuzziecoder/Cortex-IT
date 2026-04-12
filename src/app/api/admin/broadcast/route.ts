@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     });
 
     await transporter.sendMail({
-      from: `"Cortex Studio" <${process.env.SMTP_USER}>`,
+      from: `"Cortex IT" <${process.env.SMTP_USER}>`,
       bcc: emails, // Use BCC
       subject,
       html: message,

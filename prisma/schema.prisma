@@ -79,6 +79,7 @@ model JobApplication {
   phone           String
   linkedinUrl     String?
   portfolioUrl    String?
+  resumeUrl       String?
   message         String
   
   status          String   @default("Pending") // Pending, Reviewed, Rejected, Hired

@@ -170,7 +170,7 @@ export default function Footer() {
           <div className="flex flex-col items-center gap-3">
             <img 
               src="/logo-full.png" 
-              alt="Cortex Studio" 
+              alt="Cortex IT" 
               className="h-10 md:h-14 w-auto object-contain opacity-80"
             />
             <p className="text-gray-500 text-xs font-light text-center">
