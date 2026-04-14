@@ -1,11 +1,11 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL") // Connection pooling url
-  directUrl = env("POSTGRES_URL_NON_POOLING") // Direct connection url
-}
-
 generator client {
   provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model ContactRequest {
@@ -16,7 +16,7 @@ model ContactRequest {
   phone       String
   city        String
   state       String
-  services    String   // stored as JSON string
+  services    String
   description String
   budget      String
   timeline    String
@@ -30,58 +30,55 @@ model Subscriber {
 }
 
 model Project {
-  id          String   @id @default(cuid())
-  title       String
-  subtitle    String
-  overview    String
-  challenge   String
-  solution    String
-  tags        String   // stored as JSON string
-  features    String   // stored as JSON string
-  results     String   // stored as JSON string
-  logo        String
-  websiteUrl  String
-  slug        String   @unique
-  createdAt   DateTime @default(now())
+  id         String   @id @default(cuid())
+  title      String
+  subtitle   String
+  overview   String
+  challenge  String
+  solution   String
+  tags       String
+  features   String
+  results    String
+  logo       String
+  websiteUrl String
+  slug       String   @unique
+  createdAt  DateTime @default(now())
 }
 
 model Partner {
-  id        String   @id @default(cuid())
-  name      String
-  logoUrl   String
+  id         String   @id @default(cuid())
+  name       String
+  logoUrl    String
   websiteUrl String
-  createdAt DateTime @default(now())
+  createdAt  DateTime @default(now())
 }
 
 model Job {
-  id              String   @id @default(cuid())
-  title           String
-  description     String
-  department      String
-  locationType    String   // e.g. "Remote", "Bangalore"
-  employmentType  String   // e.g. "Full-time", "Contract"
-  salaryRange     String?
-  isActive        Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  
-  applications    JobApplication[]
+  id             String           @id @default(cuid())
+  title          String
+  description    String
+  department     String
+  locationType   String
+  employmentType String
+  salaryRange    String?
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  applications   JobApplication[]
 }
 
 model JobApplication {
-  id              String   @id @default(cuid())
-  jobId           String
-  job             Job      @relation(fields: [jobId], references: [id])
-  
-  firstName       String
-  lastName        String
-  email           String
-  phone           String
-  linkedinUrl     String?
-  portfolioUrl    String?
-  resumeUrl       String?
-  message         String
-  
-  status          String   @default("Pending") // Pending, Reviewed, Rejected, Hired
-  createdAt       DateTime @default(now())
+  id           String   @id @default(cuid())
+  jobId        String
+  firstName    String
+  lastName     String
+  email        String
+  phone        String
+  linkedinUrl  String?
+  portfolioUrl String?
+  message      String
+  status       String   @default("Pending")
+  createdAt    DateTime @default(now())
+  resumeUrl    String?
+  job          Job      @relation(fields: [jobId], references: [id])
 }

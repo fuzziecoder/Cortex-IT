@@ -117,7 +117,7 @@ export default function JobDetailClient({ job }: { job: JobDetail }) {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="flex-1"
             >
-              <h2 className="text-xl font-bold italic mb-6 text-white">
+              <h2 className="text-xl font-bold mb-6 text-white">
                 Job Description
               </h2>
               <div className="text-gray-400 text-sm leading-relaxed whitespace-pre-line mb-12">

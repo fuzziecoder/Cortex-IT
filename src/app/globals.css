@@ -14,7 +14,7 @@
   --color-error: #EF4444;
   --color-footer-bg: #000000;
   --color-input-bg: transparent;
-  --font-heading: var(--font-michroma), sans-serif;
+  --font-heading: var(--font-unbounded), sans-serif;
   --font-body: "Satoshi", sans-serif;
 
   --animate-infinite-scroll: infinite-scroll 25s linear infinite;
@@ -48,9 +48,16 @@ html {
 body {
   background-color: var(--color-bg-main);
   color: var(--color-text-primary);
-  font-family: var(--font-body);
+  font-family: var(--font-body), "Satoshi", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), "Unbounded", sans-serif;
+  font-weight: 200;
 }
 
 /* Custom scrollbar */
@@ -75,4 +82,40 @@ body {
 ::selection {
   background-color: var(--color-accent-primary);
   color: var(--color-text-primary);
+}
+
+:root {
+  /* existing palette */
+  --bricks-color-997177: #f5f5f5;
+  --bricks-color-4895d6: #e0e0e0;
+  --bricks-color-5492ec: #9e9e9e;
+  --bricks-color-344555: #616161;
+  --bricks-color-d7faa4: #424242;
+  --bricks-color-1dc220: #212121;
+  --bricks-color-35f787: #ffeb3b;
+  --bricks-color-eddee1: #ffc107;
+  --bricks-color-9fa1f9: #ff9800;
+  --bricks-color-bcdd8d: #ff5722;
+  --bricks-color-925c57: #f44336;
+  --bricks-color-b22c2c: #9c27b0;
+  --bricks-color-60e683: #2196f3;
+  --bricks-color-edb900: #03a9f4;
+  --bricks-color-d0b0ed: #81D4FA;
+  --bricks-color-514c06: #4caf50;
+  --bricks-color-db0dc0: #8bc34a;
+  --bricks-color-2e4eb4: #cddc39;
+  --bricks-color-ftcwtd: #efece5;
+  --bricks-color-qowqnu: #778898;
+  --bricks-color-omrfrn: #4a0404;
+}
+
+#brxe-qqoomg::before {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.72));
+}
+
+#brx-header.sticky.scrolling > .brxe-section,
+#brx-header.sticky.scrolling > .brxe-container,
+#brx-header.sticky.scrolling > .brxe-block,
+#brx-header.sticky.scrolling > .brxe-div {
+  background-color: #000000;
 }

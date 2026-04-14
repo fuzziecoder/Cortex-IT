@@ -109,14 +109,9 @@ export default function CareersClient({ initialJobs }: { initialJobs: Job[] }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-medium leading-[1.08] tracking-tight text-white max-w-3xl"
+            className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-medium leading-[1.08] tracking-tight text-white whitespace-nowrap"
           >
-            Let&rsquo;s Build
-            <br />
-            Something{" "}
-            <span className="text-[#a5b4fc]">Great</span>
-            <br />
-            Together
+            Let&rsquo;s Build Something <span className="text-[#a5b4fc]">Great</span> Together
           </motion.h1>
 
           <motion.div
@@ -173,7 +168,7 @@ export default function CareersClient({ initialJobs }: { initialJobs: Job[] }) {
 
               {/* Job Level Categories */}
               <div>
-                <h3 className="text-lg font-bold italic text-white mb-5 tracking-tight">
+                <h3 className="text-lg font-bold text-white mb-5 tracking-tight">
                   Job level categories
                 </h3>
                 <ul className="space-y-1">

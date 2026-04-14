@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Michroma } from "next/font/google";
+import { Unbounded } from "next/font/google";
 import "./globals.css";
 
-const michroma = Michroma({
-  variable: "--font-michroma",
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
+
 
 export const metadata: Metadata = {
   title: "Cortex — The Core of Technology",
@@ -36,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${michroma.variable} antialiased`}
+      className={`${unbounded.variable} antialiased`}
       data-scroll-behavior="smooth"
     >
       <body className="min-h-screen">{children}</body>

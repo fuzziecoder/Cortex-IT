@@ -131,6 +131,24 @@ export default function ChatBot() {
   };
 
   const handleQuickReply = (reply: string) => {
+    if (reply === "Book a discovery call to architect a solution") {
+      // Show user message
+      const userMessage: Message = { role: "user", content: reply };
+      setMessages((prev) => [...prev, userMessage]);
+      setSelectedReply(reply);
+      // Respond with contact form link
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              "Great choice! You can book a discovery call by filling out our contact form. Click here to get started: [Contact Form](/#contact)",
+          },
+        ]);
+      }, 400);
+      return;
+    }
     sendMessage(reply);
   };
 
@@ -140,7 +158,7 @@ export default function ChatBot() {
     <>
       {/* Floating Toggle Button Wrapper */}
       <div
-        className={`fixed bottom-8 right-8 z-40 flex items-center gap-4 transition-all duration-300 ${
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-[99] flex items-center gap-4 transition-all duration-300 ${
           isOpen ? 'scale-0 opacity-0 pointer-events-none' : 'scale-100 opacity-100'
         }`}
       >
@@ -162,7 +180,7 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6 z-50 w-[350px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-3rem)] bg-white rounded-[1.5rem] shadow-2xl overflow-hidden flex flex-col font-sans"
+            className="fixed z-50 bg-white shadow-2xl overflow-hidden flex flex-col font-sans bottom-0 right-0 w-full h-full rounded-none sm:bottom-6 sm:right-6 sm:w-[350px] sm:max-w-[calc(100vw-3rem)] sm:h-[600px] sm:max-h-[calc(100vh-3rem)] sm:rounded-[1.5rem]"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-4 bg-white border-b border-gray-100 shrink-0">
@@ -230,7 +248,16 @@ export default function ChatBot() {
                       : "bg-[#F4F4F5] text-black p-4 rounded-2xl rounded-tl-sm self-start max-w-[85%] text-[15px] leading-relaxed"
                   }
                 >
-                  {msg.content || (
+                  {msg.content ? (
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: msg.content.replace(
+                          /\[([^\]]+)\]\(([^)]+)\)/g,
+                          '<a href="$2" style="color:#4F46E5;text-decoration:underline;font-weight:500" onclick="window.location.href=\'$2\';return false;">$1</a>'
+                        ),
+                      }}
+                    />
+                  ) : (
                     <span className="flex items-center gap-2 text-gray-400">
                       <Loader2 size={14} className="animate-spin" />
                       Thinking...
