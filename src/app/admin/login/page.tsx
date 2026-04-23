@@ -29,8 +29,9 @@ export default function AdminLogin() {
     <div className="flex h-screen w-full items-center justify-center bg-black">
       <div className="w-full max-w-sm p-8 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md">
         <h1 className="text-2xl font-heading mb-6 text-white text-center">Admin Access</h1>
-        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+        <form onSubmit={handleLogin} className="flex flex-col gap-4" suppressHydrationWarning>
           <input
+            suppressHydrationWarning
             type="password"
             placeholder="Enter Admin Password"
             value={password}
@@ -39,6 +40,7 @@ export default function AdminLogin() {
           />
           {error && <p className="text-red-500 text-sm">{error}</p>}
           <button
+            suppressHydrationWarning
             type="submit"
             className="bg-white text-black font-medium text-sm px-6 py-3 rounded-lg hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 w-full"
           >

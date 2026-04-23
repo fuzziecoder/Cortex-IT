@@ -26,8 +26,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   if (!rawStudy) notFound();
 
+  let normalizedLogo = rawStudy.logo;
+  if (normalizedLogo) {
+    normalizedLogo = normalizedLogo.replace(/\\/g, "/");
+    if (!normalizedLogo.startsWith("/") && !normalizedLogo.startsWith("http")) {
+      normalizedLogo = "/" + normalizedLogo;
+    }
+  }
+
   const study = {
     ...rawStudy,
+    logo: normalizedLogo,
     tags: JSON.parse(rawStudy.tags) as string[],
     features: JSON.parse(rawStudy.features) as string[],
     results: JSON.parse(rawStudy.results) as string[],
@@ -76,7 +85,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="flex flex-col md:flex-row md:items-center gap-8 mb-6">
             {study.logo && (
               <div className="relative h-20 sm:h-24 inline-flex overflow-hidden rounded bg-white/5 p-4 mix-blend-screen shrink-0">
-                <Image src={study.logo} alt={`${study.title} Logo`} width={240} height={96} style={{ width: 'auto' }} className="object-contain h-full w-auto" />
+                <Image src={study.logo} alt={`${study.title} Logo`} width={240} height={96} style={{ width: 'auto' }} className="object-contain h-full w-auto" unoptimized />
               </div>
             )}
             <h1 className="font-heading font-bold text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05]">

@@ -26,11 +26,9 @@ interface ApplyFormProps {
 const STEPS = [
   { id: 1, label: "Upload Resume", icon: Upload },
   { id: 2, label: "Profile Details", icon: User },
-  { id: 3, label: "Previous Employment", icon: Briefcase },
-  { id: 4, label: "Certifications / Licenses", icon: Award },
-  { id: 5, label: "Geographic Mobility", icon: Globe },
-  { id: 6, label: "Job-Specific Information", icon: FileText },
-  { id: 7, label: "Review & Submit", icon: CheckCircle2 },
+  { id: 3, label: "Geographic Mobility", icon: Globe },
+  { id: 4, label: "Job-Specific Information", icon: FileText },
+  { id: 5, label: "Review & Submit", icon: CheckCircle2 },
 ];
 
 const indianStates = [
@@ -105,24 +103,30 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
     gender: "Male",
     languagesKnown: [] as string[],
     jobAlert: true,
-    // Step 3: Previous Employment
-    previousCompany: "",
-    previousRole: "",
-    yearsOfExperience: "",
-    reasonForLeaving: "",
-    // Step 4: Certifications
-    certifications: "",
-    licenses: "",
-    // Step 5: Geographic Mobility
+    // Step 3: Geographic Mobility
     willingToRelocate: "Yes",
     preferredLocations: "",
-    // Step 6: Job-specific
+    // Step 4: Job-specific
     linkedinUrl: "",
     portfolioUrl: "",
     coverLetter: "",
     noticePeriod: "",
     expectedSalary: "",
   });
+
+  const validateStep = (step: number) => {
+    if (step === 2) {
+      if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.mobileNumber.trim()) {
+        alert("Please fill in all mandatory profile details (First Name, Last Name, Email, Mobile Number).");
+        return false;
+      }
+      if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+    }
+    return true;
+  };
 
   const updateField = (field: string, value: string | boolean | string[]) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -177,9 +181,6 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
             state: parsed.state || prev.state,
             city: parsed.city || prev.city,
             graduation: parsed.graduation || prev.graduation,
-            yearsOfExperience: parsed.yearsOfExperience || prev.yearsOfExperience,
-            previousCompany: parsed.previousCompany || prev.previousCompany,
-            previousRole: parsed.previousRole || prev.previousRole,
             languagesKnown: parsed.languagesKnown
               ? parsed.languagesKnown.split(",").map((l: string) => l.trim())
               : prev.languagesKnown,
@@ -199,7 +200,8 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
   }, []);
 
   const handleNext = () => {
-    if (currentStep < 7) setCurrentStep(currentStep + 1);
+    if (!validateStep(currentStep)) return;
+    if (currentStep < 5) setCurrentStep(currentStep + 1);
   };
 
   const handlePrev = () => {
@@ -217,7 +219,7 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
         phone: formData.mobileNumber,
         linkedinUrl: formData.linkedinUrl || null,
         portfolioUrl: formData.portfolioUrl || null,
-        message: formData.coverLetter || `Applied via multi-step form. Experience: ${formData.yearsOfExperience} years. Notice period: ${formData.noticePeriod}. Expected salary: ${formData.expectedSalary}.`,
+        message: formData.coverLetter || `Applied via multi-step form. Notice period: ${formData.noticePeriod}. Expected salary: ${formData.expectedSalary}.`,
         jobAlert: formData.jobAlert,
         resumeName: formData.resumeFileName,
         resumeBase64: formData.resumeBase64,
@@ -638,91 +640,8 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
                 </div>
               )}
 
-              {/* ──────── STEP 3: Previous Employment ──────── */}
+              {/* ──────── STEP 3: Geographic Mobility ──────── */}
               {currentStep === 3 && (
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-bold">Previous Employment</h2>
-                    {autoFilled && (formData.previousCompany || formData.previousRole) && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#C8F542]/10 border border-[#C8F542]/20 rounded-full text-[#C8F542] text-[10px] font-bold uppercase tracking-wider">
-                        <Sparkles size={12} />
-                        Auto-filled
-                      </span>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className={labelClass}>Previous Company:</label>
-                      <input
-                        value={formData.previousCompany}
-                        onChange={(e) => updateField("previousCompany", e.target.value)}
-                        className={inputClass}
-                        placeholder="Company name"
-                      />
-                    </div>
-                    <div>
-                      <label className={labelClass}>Previous Role / Title:</label>
-                      <input
-                        value={formData.previousRole}
-                        onChange={(e) => updateField("previousRole", e.target.value)}
-                        className={inputClass}
-                        placeholder="Software Engineer"
-                      />
-                    </div>
-                    <div>
-                      <label className={labelClass}>Years of Experience:</label>
-                      <input
-                        value={formData.yearsOfExperience}
-                        onChange={(e) => updateField("yearsOfExperience", e.target.value)}
-                        className={inputClass}
-                        placeholder="e.g. 3"
-                        type="number"
-                      />
-                    </div>
-                    <div>
-                      <label className={labelClass}>Reason for Leaving:</label>
-                      <input
-                        value={formData.reasonForLeaving}
-                        onChange={(e) => updateField("reasonForLeaving", e.target.value)}
-                        className={inputClass}
-                        placeholder="Career growth"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* ──────── STEP 4: Certifications ──────── */}
-              {currentStep === 4 && (
-                <div>
-                  <h2 className="text-xl font-bold mb-6">Certifications / Licenses</h2>
-                  <div className="space-y-6">
-                    <div>
-                      <label className={labelClass}>Certifications:</label>
-                      <textarea
-                        value={formData.certifications}
-                        onChange={(e) => updateField("certifications", e.target.value)}
-                        className={inputClass + " resize-none"}
-                        rows={4}
-                        placeholder="List your relevant certifications (e.g., AWS Certified Solutions Architect, PMP, Google Cloud Professional)"
-                      />
-                    </div>
-                    <div>
-                      <label className={labelClass}>Professional Licenses:</label>
-                      <textarea
-                        value={formData.licenses}
-                        onChange={(e) => updateField("licenses", e.target.value)}
-                        className={inputClass + " resize-none"}
-                        rows={4}
-                        placeholder="List any professional licenses you hold"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* ──────── STEP 5: Geographic Mobility ──────── */}
-              {currentStep === 5 && (
                 <div>
                   <h2 className="text-xl font-bold mb-6">Geographic Mobility</h2>
                   <div className="space-y-6">
@@ -768,8 +687,8 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
                 </div>
               )}
 
-              {/* ──────── STEP 6: Job-Specific Information ──────── */}
-              {currentStep === 6 && (
+              {/* ──────── STEP 4: Job-Specific Information ──────── */}
+              {currentStep === 4 && (
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-xl font-bold">Job-Specific Information</h2>
@@ -831,8 +750,8 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
                 </div>
               )}
 
-              {/* ──────── STEP 7: Review & Submit ──────── */}
-              {currentStep === 7 && (
+              {/* ──────── STEP 5: Review & Submit ──────── */}
+              {currentStep === 5 && (
                 <div>
                   <h2 className="text-xl font-bold mb-6">Review & Submit</h2>
                   <p className="text-gray-400 text-sm mb-8">
@@ -855,19 +774,6 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
                       </div>
                     </div>
 
-                    {/* Experience */}
-                    <div className="bg-[#0a0a0a] border border-white/5 rounded-xl p-6">
-                      <h3 className="text-sm font-bold text-[#C8F542] uppercase tracking-wider mb-4">
-                        Experience
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                        <div><span className="text-gray-500">Previous Company:</span> <span className="text-white ml-2">{formData.previousCompany || "N/A"}</span></div>
-                        <div><span className="text-gray-500">Previous Role:</span> <span className="text-white ml-2">{formData.previousRole || "N/A"}</span></div>
-                        <div><span className="text-gray-500">Years of Exp:</span> <span className="text-white ml-2">{formData.yearsOfExperience || "N/A"}</span></div>
-                        <div><span className="text-gray-500">Notice Period:</span> <span className="text-white ml-2">{formData.noticePeriod || "N/A"}</span></div>
-                      </div>
-                    </div>
-
                     {/* Links */}
                     <div className="bg-[#0a0a0a] border border-white/5 rounded-xl p-6">
                       <h3 className="text-sm font-bold text-[#C8F542] uppercase tracking-wider mb-4">
@@ -878,6 +784,7 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
                         <div><span className="text-gray-500">Portfolio:</span> <span className="text-white ml-2">{formData.portfolioUrl || "N/A"}</span></div>
                         <div><span className="text-gray-500">Expected Salary:</span> <span className="text-white ml-2">{formData.expectedSalary || "N/A"}</span></div>
                         <div><span className="text-gray-500">Relocate:</span> <span className="text-white ml-2">{formData.willingToRelocate}</span></div>
+                        <div><span className="text-gray-500">Notice Period:</span> <span className="text-white ml-2">{formData.noticePeriod || "N/A"}</span></div>
                       </div>
                     </div>
 
@@ -912,7 +819,7 @@ export default function ApplyFormClient({ jobId, jobTitle }: ApplyFormProps) {
             Previous
           </button>
 
-          {currentStep < 7 ? (
+          {currentStep < 5 ? (
             <button
               suppressHydrationWarning
               onClick={handleNext}

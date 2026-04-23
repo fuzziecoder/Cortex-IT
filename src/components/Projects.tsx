@@ -8,11 +8,24 @@ export default async function Projects() {
   const rawProjects = await prisma.project.findMany();
   
   // Transform JSON strings to arrays
-  const projects = rawProjects.map((p) => ({
-    ...p,
-    tags: JSON.parse(p.tags) as string[],
-    desc: p.overview
-  }));
+  const projects = rawProjects.map((p) => {
+    let normalizedLogo = p.logo;
+    if (normalizedLogo) {
+      // Normalize backslashes to forward slashes
+      normalizedLogo = normalizedLogo.replace(/\\/g, "/");
+      // If it doesn't start with a slash or http, add a leading slash
+      if (!normalizedLogo.startsWith("/") && !normalizedLogo.startsWith("http")) {
+        normalizedLogo = "/" + normalizedLogo;
+      }
+    }
+
+    return {
+      ...p,
+      logo: normalizedLogo,
+      tags: JSON.parse(p.tags) as string[],
+      desc: p.overview
+    };
+  });
 
   return (
     <section id="projects" className="py-32 bg-[var(--color-bg-alt)]">
@@ -47,7 +60,7 @@ export default async function Projects() {
                     <div>
                       {project.logo && (
                         <div className="mb-6 relative h-12 sm:h-16 inline-flex overflow-hidden rounded">
-                          <Image src={project.logo} alt={`${project.title} Logo`} width={160} height={64} style={{ width: 'auto' }} className="object-contain object-left h-full w-auto opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+                          <Image src={project.logo} alt={`${project.title} Logo`} width={160} height={64} style={{ width: 'auto' }} className="object-contain object-left h-full w-auto opacity-70 group-hover:opacity-100 transition-opacity duration-300" unoptimized />
                         </div>
                       )}
                       <h3 className="font-heading font-light text-2xl md:text-3xl text-white mb-4">
